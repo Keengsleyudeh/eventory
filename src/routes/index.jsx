@@ -7,7 +7,8 @@ import Home from "../pages/Home"
 import Profile from "../pages/Profile"
 import UserHome from "../pages/UserHome"
 import EventsTable from "../pages/EventsTable";
-import EventManagementForm from "../pages/EventManagementForm";
+// import EventManagementForm from "../pages/EventManagementForm";
+import CreateEventForm from "../pages/CreateEventForm";
 
 const Routes = () => {
   const { token } = useAuth();
@@ -36,7 +37,7 @@ const Routes = () => {
         },
         {
           path: "/profile",
-          element: <EventManagementForm/>,
+          element: <CreateEventForm/>,
         },
         {
           path: "/logout",

@@ -17,7 +17,7 @@ function Header() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            EventPro
+            Eventory
           </motion.a>
           <div className="hidden md:flex space-x-4">
             {['Features', 'Pricing', 'Contact'].map((item, index) => (

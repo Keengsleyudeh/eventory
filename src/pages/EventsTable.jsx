@@ -1,25 +1,29 @@
 import React from 'react'
+import { useEvent } from '../services/useEvent';
 
 const EventsTable = () => {
-  const events = [
-    {
-      id: 1,
-      name: 'Summer Festival',
-      date: '2024-08-15',
-      createdAt: '2024-05-01',
-      duration: '3 days',
-      location: 'Central Park'
-    },
-    {
-      id: 2,
-      name: 'Tech Conference',
-      date: '2024-09-22',
-      createdAt: '2024-06-10',
-      duration: '2 days',
-      location: 'Convention Center'
-    },
+  // const events = [
+  //   {
+  //     id: 1,
+  //     name: 'Summer Festival',
+  //     date: '2024-08-15',
+  //     createdAt: '2024-05-01',
+  //     duration: '3 days',
+  //     location: 'Central Park'
+  //   },
+  //   {
+  //     id: 2,
+  //     name: 'Tech Conference',
+  //     date: '2024-09-22',
+  //     createdAt: '2024-06-10',
+  //     duration: '2 days',
+  //     location: 'Convention Center'
+  //   },
     // Add more events as needed
-  ];
+  // ];
+
+  const {events} = useEvent();
+  console.log(events);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -35,11 +39,11 @@ function UpcomingEventsTable({ events }) {
     <div className="w-full">
       {/* Mobile view */}
       <div className="block md:hidden">
-        {events.map((event) => (
+        {events?.map((event) => (
           <div key={event.id} className="bg-white shadow-md rounded-lg mb-4 p-4">
-            <h3 className="font-bold text-lg mb-2">{event.name}</h3>
-            <p className="text-sm text-gray-600"><span className="font-semibold">Date:</span> {event.date}</p>
-            <p className="text-sm text-gray-600"><span className="font-semibold">Created:</span> {event.createdAt}</p>
+            <h3 className="font-bold text-lg mb-2">{event.event_name}</h3>
+            <p className="text-sm text-gray-600"><span className="font-semibold">Date:</span> {event.start_date}</p>
+            <p className="text-sm text-gray-600"><span className="font-semibold">Created:</span> {event.created_at}</p>
             <p className="text-sm text-gray-600"><span className="font-semibold">Duration:</span> {event.duration}</p>
             <p className="text-sm text-gray-600"><span className="font-semibold">Location:</span> {event.location}</p>
           </div>
@@ -69,16 +73,16 @@ function UpcomingEventsTable({ events }) {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {events.map((event) => (
+            {events?.map((event) => (
               <tr key={event.id}>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm font-medium text-gray-900">{event.name}</div>
+                  <div className="text-sm font-medium text-gray-900">{event.event_name}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-500">{event.date}</div>
+                  <div className="text-sm text-gray-500">{event.start_date}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-500">{event.createdAt}</div>
+                  <div className="text-sm text-gray-500">{event.created_at}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm text-gray-500">{event.duration}</div>
