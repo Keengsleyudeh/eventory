@@ -1,6 +1,7 @@
 import { motion } from "framer-motion"
 import { useAuth } from "../provider/authProvider";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function LogButton() {
   const token = localStorage.getItem("token");
@@ -16,6 +17,7 @@ function LogButton() {
     else {
       clearToken(); // Clear the authentication token
       navigate("/", { replace: true }); // Navigate to the home page ("/") with replace option set to true
+      toast.success("Logged out successfully")
     }
     
   }
@@ -23,7 +25,7 @@ function LogButton() {
   return (
     <>
       <motion.button 
-            className="bg-blue-600 text-white px-4 py-2 rounded-full font-semibold hover:bg-blue-700 transition duration-300"
+            className="bg-blue-600 text-white text-[8px} px-4 py-2 rounded-full font-semibold hover:bg-blue-700 transition duration-300"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={handleClick}

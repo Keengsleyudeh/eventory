@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createContext, useContext, useMemo, useReducer } from "react";
+import { createContext, useContext, useMemo, useReducer, useState } from "react";
 
 // Create the authentication context
 const AuthContext = createContext();
@@ -60,19 +60,24 @@ const AuthProvider = ({ children }) => {
     dispatch({ type: ACTIONS.clearToken });
   };
 
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+
   // Memoized value of the authentication context
   const contextValue = useMemo(
     () => ({
       ...state,
       setToken,
-      clearToken,
+      clearToken, 
     }),
     [state]
   );
 
   // Provide the authentication context to the children components
   return (
-    <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
+    // <AuthContext.Provider value={{setToken, clearToken, username, setUsername, password, setPassword}}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{...contextValue, username, setUsername, email, setEmail, password, setPassword}}>{children}</AuthContext.Provider>
   );
 };
 

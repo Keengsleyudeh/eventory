@@ -1,13 +1,11 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { useAuth } from "../provider/authProvider";
 import { ProtectedRoute } from "./ProtectedRoute";
-import Logout from "../pages/Logout";
 import Login from "../pages/Login";
 import Home from "../pages/Home"
 import Profile from "../pages/Profile"
-import UserHome from "../pages/UserHome"
 import EventsTable from "../pages/EventsTable";
-import EventManagementForm from "../pages/EventManagementForm";
+import CreateEventForm from "../pages/CreateEventForm";
 
 const Routes = () => {
   const { token } = useAuth();
@@ -32,15 +30,19 @@ const Routes = () => {
       children: [
         {
           path: "/",
-          element: <UserHome />,
+          element: <EventsTable />,
         },
         {
-          path: "/profile",
-          element: <EventManagementForm/>,
+          path: "/form",
+          element: <CreateEventForm/>,
         },
         {
           path: "/logout",
           element: <Home />,
+        },
+        {
+          path: "/table",
+          element: <EventsTable />,
         },
       ],
     },
