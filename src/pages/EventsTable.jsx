@@ -1,58 +1,39 @@
 import React from 'react'
 import { useEvent } from '../services/useEvent';
+import Header from '../ui/Header';
+import Button from '../ui/Button';
+import { useNavigate } from 'react-router-dom';
+import { useDeleteEvent } from '../services/useDeleteEvent';
+import { HiTrash } from 'react-icons/hi2';
 
 const EventsTable = () => {
-  // const events = [
-  //   {
-  //     id: 1,
-  //     name: 'Summer Festival',
-  //     date: '2024-08-15',
-  //     createdAt: '2024-05-01',
-  //     duration: '3 days',
-  //     location: 'Central Park'
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'Tech Conference',
-  //     date: '2024-09-22',
-  //     createdAt: '2024-06-10',
-  //     duration: '2 days',
-  //     location: 'Convention Center'
-  //   },
-    // Add more events as needed
-  // ];
 
-  const {events} = useEvent();
+  const {events, isCreating} = useEvent();
   console.log(events);
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold mb-4">Upcoming Events</h1>
-      <UpcomingEventsTable events={events} />
-    </div>
+    <>
+      <Header />
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-2xl font-bold mb-4">Upcoming Events</h1>
+        <UpcomingEventsTable events={events} isCreating={isCreating}/>
+      </div>
+    </>
   );
 };
 
 
-function UpcomingEventsTable({ events }) {
+function UpcomingEventsTable({ events, isCreating }) {
+  const navigate = useNavigate();
+
+  const {isDeleting, deleteEvent} = useDeleteEvent();
+
+  if (isDeleting || isCreating) return <Spinner />;
+
   return (
     <div className="w-full">
-      {/* Mobile view */}
-      <div className="block md:hidden">
-        {events?.map((event) => (
-          <div key={event.id} className="bg-white shadow-md rounded-lg mb-4 p-4">
-            <h3 className="font-bold text-lg mb-2">{event.event_name}</h3>
-            <p className="text-sm text-gray-600"><span className="font-semibold">Date:</span> {event.start_date}</p>
-            <p className="text-sm text-gray-600"><span className="font-semibold">Created:</span> {event.created_at}</p>
-            <p className="text-sm text-gray-600"><span className="font-semibold">Duration:</span> {event.duration}</p>
-            <p className="text-sm text-gray-600"><span className="font-semibold">Location:</span> {event.location}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* Table view for larger screens */}
-      <div className="hidden md:block overflow-x-auto">
-        <table className="min-w-full bg-white">
+      <div className=" overflow-x-auto">
+        <table className="min-w-full bg-white mb-5">
           <thead className="bg-gray-100">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -62,13 +43,13 @@ function UpcomingEventsTable({ events }) {
                 Date
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Created At
-              </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Duration
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Location
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            
               </th>
             </tr>
           </thead>
@@ -82,18 +63,28 @@ function UpcomingEventsTable({ events }) {
                   <div className="text-sm text-gray-500">{event.start_date}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-500">{event.created_at}</div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm text-gray-500">{event.duration}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm text-gray-500">{event.location}</div>
                 </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-sm text-gray-500">
+                    <button onClick={()=>deleteEvent(event.id)} disabled={isDeleting || isCreating}>
+                      <HiTrash />
+                    </button>
+                  </div>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
+        <Button size="small" 
+          onClick={()=>navigate("/form")}
+          disabled={isDeleting || isCreating}
+          >
+            Add Event
+        </Button>
       </div>
     </div>
   );

@@ -7,18 +7,6 @@ export function useEvent() {
         queryFn: getEvents
         }
       );
-      // data.map((data)=>{
-      //   return({
-
-          
-      //     createAt: data.create_at, 
-      //     name: data.event_name,
-      //     location,
-      //     duration
-      //   }
-          
-      //   )
-      // })
 
     return {isLoading, events, error}
 }

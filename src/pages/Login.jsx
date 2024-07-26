@@ -25,18 +25,51 @@ import { motion } from 'framer-motion';
   
 //   export default Login;
 
-  import React from 'react';
+  import React, { useState } from 'react';
+import axios from "axios";
 
 const Login = () => {
 
-  const { setToken } = useAuth();
+  const { username, setUsername, password, setPassword, email, setEmail, setToken } = useAuth();
   const navigate = useNavigate();
 
   function handleLogin(e) {
+    if (!username || !password || !email ) return;
     e.preventDefault();
-    setToken("this is a test token");
-    navigate("/", { replace: true });
+    setToken("QffaDtycvd");
+    navigate("/table", { replace: true });
   };
+
+//   async function handleLogin(e) {
+//     // e.preventDefault();
+      
+//     //reqres registered sample user
+//     const loginPayload = {
+//       email: 'eve.holt@reqres.in',
+//       password: 'cityslicka'
+//     }
+  
+//     await axios.post("https://reqres.in/api/login", loginPayload)
+//       .then(response => {
+//         //get token from response
+//         const token  =  response.data.token;
+  
+//         //set JWT token to local
+//         // localStorage.setItem("token", token);
+//         setToken(token);
+  
+//         // //set token to axios common header
+//         // setAuthToken(token);
+  
+//  //redirect user to home page
+//       navigate("/", { replace: true });
+//       // window.location.href = '/'
+//       })
+//       .catch(err => console.log(err));
+      
+//   };
+
+  console.log(username, email, password)
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 font-inter">
@@ -51,39 +84,38 @@ const Login = () => {
             Welcome back
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-            Please sign in to your account
+            Please sign up/in
           </p>
         </div>
         <form className="mt-8 space-y-6" action="#" method="POST">
           <input type="hidden" name="remember" value="true" />
           <div className="rounded-md shadow-sm -space-y-px">
-            <div>
+          <div>
               <label htmlFor="email-address" className="sr-only">Email address</label>
               <input id="email-address" name="email" type="email" autoComplete="email"
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm transition duration-300 ease-in-out hover:border-indigo-300" 
-                placeholder="Email address" />
+                placeholder="Email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)} 
+                required/>
+            </div>
+            <div>
+              <label htmlFor="username" className="sr-only">Username</label>
+              <input id="username" name="username" type="text"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm transition duration-300 ease-in-out hover:border-indigo-300" 
+                placeholder="Username/Firstname"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required />
             </div>
             <div>
               <label htmlFor="password" className="sr-only">Password</label>
               <input id="password" name="password" type="password" autoComplete="current-password"
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm transition duration-300 ease-in-out hover:border-indigo-300" 
-                placeholder="Password" />
-            </div>
-          </div>
-
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <input id="remember-me" name="remember-me" type="checkbox" 
-                className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded transition duration-300 ease-in-out" />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                Remember me
-              </label>
-            </div>
-
-            <div className="text-sm">
-              <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500 transition duration-300 ease-in-out">
-                Forgot your password?
-              </a>
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)} 
+                required/>
             </div>
           </div>
 
@@ -93,7 +125,7 @@ const Login = () => {
               type="submit" 
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out"
             >
               Log in
             </motion.button>

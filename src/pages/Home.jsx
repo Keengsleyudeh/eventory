@@ -103,7 +103,7 @@ const Home = () => {
         {/* Footer */}
         <footer className="bg-gray-200 py-8">
           <div className="container mx-auto px-6 text-center text-gray-600">
-            <p>&copy; 2024 EventPro. All rights reserved.</p>
+            <p>&copy; 2024 Eventory. All rights reserved.</p>
           </div>
         </footer>
       </div>

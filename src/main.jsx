@@ -2,12 +2,16 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import { ThemeProvider } from '@material-tailwind/react'
+import { ErrorBoundary } from 'react-error-boundary'
+import ErrorFallback from './pages/ErrorFallback.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <ThemeProvider>
+    <ErrorBoundary
+      FallbackComponent={ErrorFallback}
+      onReset={()=>window.location.replace("/")}>
       <App />
-    </ThemeProvider>
+    </ErrorBoundary>
   </React.StrictMode>,
 )
+

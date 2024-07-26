@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import Logout from "../pages/Logout";
 import LogButton from "./LogButton";
+import { useAuth } from "../provider/authProvider";
 
 function Header() {
   const navigate = useNavigate();
+  const {username} = useAuth()
   return (
     <>
       <div className="relative z-10">
@@ -20,7 +21,7 @@ function Header() {
             Eventory
           </motion.a>
           <div className="hidden md:flex space-x-4">
-            {['Features', 'Pricing', 'Contact'].map((item, index) => (
+            {['Welcome', `${username? username : ''}`].map((item, index) => (
               <motion.a 
                 key={item} 
                 href="#" 

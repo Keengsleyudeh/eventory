@@ -66,7 +66,7 @@ return data;
 export async function deleteEvent(id) {
 
     const { data, error } = await supabase
-    .from('cabins')
+    .from('events')
     .delete()
     .eq('id', id)
 
