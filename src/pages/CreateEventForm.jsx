@@ -4,7 +4,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 // import toast from "react-hot-toast";
 import Form from "../ui/Form";
 import FormRow from "../ui/FormRow";
-import Textarea from "../ui/Textarea";
 import Input from "../ui/Input";
 // import { useForm } from "@tanstack/react-form";
 import { createEvent } from "../services/apiEvents";
