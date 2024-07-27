@@ -60,6 +60,7 @@ const AuthProvider = ({ children }) => {
     dispatch({ type: ACTIONS.clearToken });
   };
 
+  //setting the global login credentials state
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
@@ -76,15 +77,9 @@ const AuthProvider = ({ children }) => {
 
   // Provide the authentication context to the children components
   return (
-    // <AuthContext.Provider value={{setToken, clearToken, username, setUsername, password, setPassword}}>{children}</AuthContext.Provider>
     <AuthContext.Provider value={{...contextValue, username, setUsername, email, setEmail, password, setPassword}}>{children}</AuthContext.Provider>
   );
 };
-
-// Custom hook to easily access the authentication context
-// export const useAuth = () => {
-//   return useContext(AuthContext);
-// };
 
 export function useAuth() {
   return useContext(AuthContext)

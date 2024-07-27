@@ -69,8 +69,6 @@ const Login = () => {
       
 //   };
 
-  console.log(username, email, password)
-
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 font-inter">
       <motion.div 

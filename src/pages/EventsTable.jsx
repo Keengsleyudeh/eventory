@@ -92,7 +92,3 @@ function UpcomingEventsTable({ events, isCreating }) {
 
 
 export default EventsTable;
-
-// export default function EventsTable() {
-//   return <div>Yo</div>
-// }

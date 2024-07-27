@@ -24,10 +24,6 @@ const StyledBody = styled.div`
 
   const {register, handleSubmit, reset, getValues, formState} = useForm();
   const {errors} = formState;
-  
-  // const {errors} = formState;
-  // console.log(errors)
-
   const queryClient = useQueryClient();
   const navigate = useNavigate();
 
@@ -43,19 +39,11 @@ const StyledBody = styled.div`
     onError: (err) => toast.error(err.message)
   });
 
-
-
   function onSubmit(data) {
-    // await mutate({...data, image: data.image[0]});
     console.log(data)
     mutate(data)
 
   };
-
-
-  // function onError(error) {
-  //   // console.log(error)
-  // }
 
   if (isCreating) return <Spinner />
   
@@ -96,7 +84,7 @@ const StyledBody = styled.div`
             <Button variation="secondary" type="reset">
               Cancel
             </Button>
-            <Button disabled={isCreating}>Add cabin</Button>
+            <Button disabled={isCreating}>Add event</Button>
           </FormRow>
 
         </Form >

@@ -11,11 +11,8 @@ const Routes = () => {
   const { token } = useAuth();
 
   // Define public routes accessible to all users
+  // was not later used
   const routesForPublic = [
-    {
-      path: "/service",
-      element: <div>Service Page</div>,
-    },
     {
       path: "/about-us",
       element: <div>About Us</div>,
