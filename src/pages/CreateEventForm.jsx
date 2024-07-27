@@ -93,4 +93,4 @@ const StyledBody = styled.div`
     )
   }
 
-  export default CreateEventForm;s
+  export default CreateEventForm;
