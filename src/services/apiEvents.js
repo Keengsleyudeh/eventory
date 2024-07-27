@@ -1,5 +1,5 @@
 import supabase, { supabaseUrl } from "./supabase";
-
+//To get events from database (supabase)
 export async function getEvents() {
     const { data, error } = await supabase
     .from('events')
@@ -7,34 +7,18 @@ export async function getEvents() {
 
     if (error) {
         console.error(error)
-        throw new Error("Cabins could not be loaded");
+        throw new Error("events could not be loaded");
     }
 
     return data;
 };
 
-
+//To create new event
 export async function createEvent(newEvent, id) {
-// const hasImagePath = newCabin.image?.startsWith?.(supabaseUrl);
-
-// const imageName = `${Math.random()}-${newCabin.image.name}`.replaceAll("/", "");
-
-// const imagePath = hasImagePath? newCabin.image: `${supabaseUrl}/storage/v1/object/public/cabins-image/${imageName}`
-
-// https://xhpulchjrrlylegtsbpc.supabase.co/storage/v1/object/public/cabins-image/cabin-001.jpg
-// 1. Create/Edit the cabin
-
 let query = supabase.from("events");
 
-//A) CREATE
 
 if (!id) query = query.insert([newEvent])
-    
-//B) EDIT
-// if(id) query = query.update({...newCabin, image: imagePath}).eq("id", id);
-
-// console.log(newCabin.image)
-
 const {data, error} = await query.select().single()
 
 if (error) {
@@ -42,27 +26,10 @@ if (error) {
     throw new Error("Event could not be created");
 }
 
-//2. Upload the image
-//if anything goes wrong check the code line below
-// if (hasImagePath) return data;
-
-// const {  error: storageError } = await supabase.storage.from('cabins-image').upload(imageName, newCabin.image);
-
-
-// if(storageError) {
-//     await supabase
-//     .from('cabins')
-//     .delete()
-//     .eq('id', data.id)
-
-//     console.error(error)
-//     throw new Error("Cabins image could not be uploaded");
-// }
-
 return data;
 }
 
-
+//To delete event
 export async function deleteEvent(id) {
 
     const { data, error } = await supabase

@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../provider/authProvider';
 
+//Was not later used in the app
+
 const Profile = () => {
    const {username} = useAuth();
     const navigate = useNavigate();

@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import LogButton from '../ui/LogButton';
 import Header from '../ui/Header';
 
 const Home = () => {
